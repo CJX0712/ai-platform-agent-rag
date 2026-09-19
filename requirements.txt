@@ -1,0 +1,21 @@
+# 直接依赖（人工维护，与 pyproject.toml [project].dependencies 一致）
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+langgraph==0.2.73
+langchain-text-splitters==0.3.6
+chromadb>=0.6.0
+sqlalchemy==2.0.36
+python-jose[cryptography]==3.3.0
+slowapi==0.1.10
+structlog==24.1.0
+numpy>=2.1
+httpx==0.28.1
+
+# 可选：真实文本向量化（默认使用轻量 hash 向量，免模型下载即可离线运行）
+# sentence-transformers>=2.7.0
+
+# 开发/测试（pip install -e ".[dev]" 或 pip install -r requirements.txt + 下方）
+# pytest==8.3.4
+# ruff==0.8.4

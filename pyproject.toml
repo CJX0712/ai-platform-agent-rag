@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-platform-agent-rag"
+version = "0.1.0"
+description = "端到端可运行的 LLM 应用平台：Agent 编排 + RAG 知识库（FastAPI / LangGraph / Chroma）"
+authors = [{ name = "晨星" }]
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi==0.115.6",
+  "uvicorn[standard]==0.34.0",
+  "pydantic==2.10.4",
+  "pydantic-settings==2.7.1",
+  "langgraph==0.2.73",
+  "langchain-text-splitters==0.3.6",
+  "chromadb>=0.6.0",
+  "sqlalchemy==2.0.36",
+  "python-jose[cryptography]==3.3.0",
+  "slowapi==0.1.10",
+  "structlog==24.1.0",
+  "numpy>=2.1",
+  "httpx==0.28.1",
+]
+
+[project.optional-dependencies]
+embeddings = ["sentence-transformers>=2.7.0"]
+dev = ["pytest==8.3.4", "ruff==0.8.4"]
+
+[tool.setuptools]
+packages = ["ai_platform", "ai_platform.gateway"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008"]
