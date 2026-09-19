@@ -74,7 +74,21 @@ ai-platform-agent-rag/
 | 文档 | 内容 |
 |------|------|
 | `docs/ARCHITECTURE.md` | 系统架构、模块职责与接口、调用关系、技术决策 |
-| `docs/DEPLOYMENT.md` | 本地 / Docker / 云服（FRP）部署、环境变量、回滚 |
+| `docs/DEPLOYMENT.md` | 本地 / Docker / 云服（FRP）部署、环境变量、回滚、排障 |
 | `docs/USAGE.md` | API 调用示例、接入真实模型、前端使用 |
+
+---
+
+## 实测状态（Windows 11 / Python 3.13 / Docker 29）
+
+| 验证项 | 结果 |
+|--------|------|
+| 单元测试（pytest） | 18/18 通过 |
+| 静态检查（ruff） | 全部通过 |
+| 裸机端到端（scripts/e2e_check.py） | 7/7 通过 |
+| Docker 构建 | 成功（`ai-platform-agent-rag:0.1.0`） |
+| 容器内端到端 | 7/7 通过 |
+
+端到端覆盖：健康检查、工具清单、知识摄取、**RAG 检索命中原文**、**工具调用（123*45+6=5541）**、参数缺失 422、WebSocket 实时对话。
 
 License: MIT

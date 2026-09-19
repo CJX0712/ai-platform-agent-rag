@@ -63,7 +63,28 @@ SSH_HOST=43.161.233.163 SSH_USER=root SSH_PORT=22 ./deploy/cloud-deploy.sh
 
 | 现象 | 原因 | 处理 |
 |------|------|------|
-| `numpy` 源码编译失败 | Python 3.13 + 旧 numpy 无轮子 | 使用 `requirements.lock`（numpy≥2.1） |
+| `numpy` 源码编译失败 | Python 3.13 + 旧 numpy 无轮子 | 使用 `requirements.lock`（numpy≥2.1）；Windows 建议 `--only-binary=:all:` |
 | 端口占用 | 8000 已被占 | 改 `APP_PORT` 或 compose 端口映射 |
 | `/health` 返回但 chat 慢 | 真实模型首次加载 | 预热一次请求；或先用 `mock` 验证链路 |
 | Chroma 目录锁死 | 同目录被多进程打开 | 确保单实例访问 `APP_CHROMA_PATH` |
+| `docker build` 报 `failed to fetch anonymous token` | 本机访问 Docker Hub 被网络/代理阻断 | 见下方 6.1 |
+
+### 6.1 Docker Hub 不可达时的构建办法（本机实测有效）
+
+现象：`failed to authorize: failed to fetch anonymous token ... Bad Gateway`。
+诊断顺序：宿主机直连/代理访问 `https://auth.docker.io/token` → 若均失败，说明是网络侧限制，不是 Dockerfile 问题。
+
+绕行（无需改动 Dockerfile、无需重启 Docker Desktop）：
+
+```bash
+# 1) 从可用加速器域名直接拉基础镜像
+docker pull docker.m.daocloud.io/library/python:3.13-slim
+# 2) 打成本地 tag，让 FROM python:3.13-slim 命中缓存
+docker tag docker.m.daocloud.io/library/python:3.13-slim python:3.13-slim
+# 3) 正常构建
+docker build -t ai-platform-agent-rag:0.1.0 .
+```
+
+长效方案：Docker Desktop → Settings → Docker Engine，加入
+`"registry-mirrors": ["https://docker.m.daocloud.io"]` 后重启 Docker Desktop。
+注意：重启 Docker 会停止所有容器，重启策略为 `no` 的容器（如 Pi Node testnet2）不会自动恢复，需手动 `docker start`。
