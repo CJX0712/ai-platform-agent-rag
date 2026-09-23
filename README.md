@@ -1,5 +1,11 @@
 # AI Platform · Agent + RAG
 
+<p align="center">
+  <a href="https://github.com/CJX0712/ai-platform-agent-rag/actions/workflows/ci.yml"><img src="https://github.com/CJX0712/ai-platform-agent-rag/actions/workflows/ci.yml/badge.svg" alt="ci"></a>
+  <a href="https://github.com/CJX0712/ai-platform-agent-rag/releases"><img src="https://img.shields.io/github/v/release/CJX0712/ai-platform-agent-rag?sort=semver" alt="release"></a>
+  <img src="https://img.shields.io/badge/author-%E6%99%A8%E6%98%9F-1f6feb" alt="author">
+</p>
+
 端到端可运行的 LLM 应用平台：**Agent 编排（LangGraph）+ RAG 知识库（Chroma）+ 统一模型供给 + FastAPI 网关 + 单文件前端**。
 优先复用业界领先开源成果（FastAPI / LangGraph / LangChain / Chroma / SQLAlchemy），按单一职责划分 12 个可独立验证的模块。
 
