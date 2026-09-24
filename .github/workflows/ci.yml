@@ -31,6 +31,9 @@ jobs:
           APP_EMBEDDING_PROVIDER: hash
         run: python -m pytest tests -q
 
+      - name: 准备运行时数据目录
+        run: mkdir -p data
+
       - name: 端到端冒烟
         env:
           PYTHONPATH: ${{ github.workspace }}
