@@ -9,15 +9,15 @@ description = "端到端可运行的 LLM 应用平台：Agent 编排 + RAG 知�
 authors = [{ name = "晨星" }]
 requires-python = ">=3.11"
 dependencies = [
-  "fastapi==0.115.6",
-  "uvicorn[standard]==0.34.0",
-  "pydantic==2.10.4",
-  "pydantic-settings==2.7.1",
+  "fastapi==0.141.1",
+  "uvicorn[standard]==0.53.0",
+  "pydantic==2.13.5",
+  "pydantic-settings==2.15.0",
   "langgraph==0.2.73",
   "langchain-text-splitters==0.3.6",
   "chromadb>=0.6.0",
-  "sqlalchemy==2.0.36",
-  "python-jose[cryptography]==3.3.0",
+  "sqlalchemy==2.0.54",
+  "python-jose[cryptography]==3.5.0",
   "slowapi==0.1.10",
   "structlog==24.1.0",
   "numpy>=2.1",
@@ -26,7 +26,7 @@ dependencies = [
 
 [project.optional-dependencies]
 embeddings = ["sentence-transformers>=2.7.0"]
-dev = ["pytest==8.3.4", "ruff==0.8.4"]
+dev = ["pytest==8.3.4", "ruff==0.16.8"]
 
 [tool.setuptools]
 packages = ["ai_platform", "ai_platform.gateway"]
